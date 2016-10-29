@@ -1,0 +1,7 @@
+.bar {
+  border: .1em solid white;
+  height:2em;
+  display: block;
+  color: white;
+  text-align: right;
+}
