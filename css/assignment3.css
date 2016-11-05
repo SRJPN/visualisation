@@ -1,0 +1,22 @@
+.bar {
+  border: .1em solid white;
+  height:2em;
+  display: block;
+  color: white;
+  text-align: center;
+  border-radius: 1em;
+}
+
+.sort {
+  border-radius: 1em;
+}
+
+.subject{
+     border: none;
+     color: white;
+     padding: 15px 32px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     border-radius: 1em;
+   }
