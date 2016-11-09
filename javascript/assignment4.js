@@ -1,21 +1,21 @@
 const LIMIT = 10;
 
 var generateValues = function(limit) {
-    return [...new Array(10)].map((d, i) => i + 1);
+    return [...new Array(limit)].map((d, i) => i + 1);
 };
 
 var rows = [{
     name: 'n',
-    formula: (n) => n
+    formula: d3.scaleLinear()
 }, {
     name: 'n square',
-    formula: (n) => n * n
+    formula: d3.scalePow().exponent(2)
 }, {
     name: 'log(n)',
-    formula: (n) => Math.log(n) / Math.log(10)
+    formula: d3.scaleLog()
 }, {
     name: 'log(n) rounded',
-    formula: (n) => Math.round(Math.log(n))
+    formula: d3.scaleLog().rangeRound([0, 1])
 }]
 
 
