@@ -85,7 +85,8 @@ window.onload = function() {
 };
 
 var tranform = function(shape, index) {
-    shape.transition()
-        .duration(DURATION)
-        .attr("transform", "translate(" + index * (BOX_SIZE + MARGIN) + ", " + UPPER_MARGIN + ")")
+    shape
+    // .transition()
+    // .duration(DURATION)
+        .attr("transform", `translate( ${index * (BOX_SIZE + MARGIN)},${UPPER_MARGIN})`)
 };
