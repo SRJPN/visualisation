@@ -128,10 +128,6 @@ var clearGraph = function() {
     svg.selectAll('path').remove();
 };
 
-var clearCircles = function() {
-    svg.selectAll('circle').remove();
-};
-
 // =======================================================================================================================================
 // Random Number generator
 
@@ -171,7 +167,6 @@ var toggle = function() {
     $('input[type="checkbox" i]').on('click', function() {
         var index = ring();
         clearInterval(active);
-        clearCircles();
         charts[index][0](getValues())
         active = repeater(charts[index][1]);
     });
