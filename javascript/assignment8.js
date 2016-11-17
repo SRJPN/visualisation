@@ -15,26 +15,24 @@ const sinLinePoints = [...new Array(10)].map((d, i) => [i, i]);
 const INCREMENTER = 5,
     RADIUS_OF_CIRCLE = 3.5;
 
-var decoratedXScale = ([x, y]) => xScale(x);
-var decoratedYScale = ([x, y]) => yScale(y);
-var decoratedSineScale = ([x, y]) => yScale(modifier(x));
+var straightLineDetails = {
+    'xRefiner': decoratedXScale,
+    'yRefiner': decoratedYScale,
+    'curve': d3.curveLinear,
+    'color': 'steelblue'
+};
 
-var decorateLine = function(line, values, xScale, yScale) {
-    return line.selectAll('circle')
-        .data(values)
-        .enter()
-        .append('circle')
-        .attr('r', RADIUS_OF_CIRCLE)
-        .attr('cx', xScale)
-        .attr('cy', yScale);
+var sineLineDetails = {
+    'xRefiner': decoratedXScale,
+    'yRefiner': decoratedSineScale,
+    'curve': d3.curveLinear,
+    'color': 'steelblue'
 };
 
 window.onload = function() {
-    var chartArea = createGraph();
+    var container = d3.select('.container');
+    var chartArea = createGraph(container);
 
-    var line1 = loadLineChart(chartArea, points, simpleLine);
-    var line2 = loadLineChart(chartArea, points, sinLine);
-
-    decorateLine(line1, points, decoratedXScale, decoratedYScale);
-    decorateLine(line2, points, decoratedXScale, decoratedSineScale);
+    drawAndDecorateLine(chartArea, points, straightLineDetails);
+    drawAndDecorateLine(chartArea, points, sineLineDetails);
 };
