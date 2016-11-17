@@ -49,7 +49,8 @@ var drawAxis = function(svg) {
 var createGraph = function(selection) {
     var svg = selection.append('svg')
         .attr('width', WIDTH)
-        .attr('height', HEIGHT);
+        .attr('height', HEIGHT)
+        .style('display', 'block');
 
     drawAxis(svg)
 
