@@ -13,7 +13,7 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src=
 "javascript/jquery-3.1.1.min.js">
 </script>
-<script type="text/javascript" src="javascript/lineChart.js">
+<script type="text/javascript" src="javascript/chartLib.js">
 </script>
 <script type="text/javascript" src="javascript/'$1'.js">
 </script>
