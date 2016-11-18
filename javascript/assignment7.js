@@ -32,6 +32,6 @@ window.onload = function() {
     var container = d3.select('.container');
     var chartArea = createGraph(container);
 
-    loadLineChart(chartArea, points, straightLineDetails);
-    loadLineChart(chartArea, points, sineLineDetails);
+    drawLineChart(chartArea, points, straightLineDetails);
+    drawLineChart(chartArea, points, sineLineDetails);
 };

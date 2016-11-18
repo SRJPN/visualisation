@@ -3,10 +3,11 @@ const sinLinePoints = [...new Array(10)].map((d, i) => [i, i]);
 const INCREMENTER = 5,
     RADIUS_OF_CIRCLE = 3.5;
 
+var scale = d3.scaleLinear()
+    .domain([0, 1])
+    .range([INNER_HEIGHT, 0]);
+
 var decoratedMiscScale = function([x, y]) {
-    var scale = d3.scaleLinear()
-        .domain([0, 1])
-        .range([INNER_HEIGHT, 0]);
     return scale(swamijiFormula(x));
 };
 
@@ -27,5 +28,4 @@ window.onload = function() {
     var chartArea = createGraph(container);
 
     drawAndDecorateLine(chartArea, sinLinePoints, lineDetails);
-
 };

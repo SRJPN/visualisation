@@ -31,8 +31,8 @@ window.onload = function() {
             'curve': d3.curveCardinal.tension(tensionScale(i)),
             'color': 'steelblue'
         };
-        var chartArea = createGraph(container);
 
+        var chartArea = createGraph(container);
         drawAndDecorateLine(chartArea, sinLinePoints, lineDetails);
     }
 };
