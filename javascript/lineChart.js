@@ -104,7 +104,6 @@ var drawAreaChart = function(drawArea, values, {
 
     drawPath(g, values, {
         refiner: area,
-        color: color,
         fillColour: fillColour
     });
 

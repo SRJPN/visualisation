@@ -2,7 +2,7 @@ const startTension = -2,
     DIFFERENCE = 0.6,
     LIMIT = 5;
 
-const sinLinePoints = [...new Array(10)].map((d, i) => [i, i]);
+const sinLinePoints = [...new Array(11)].map((d, i) => [i, i]);
 
 const INCREMENTER = 5,
     RADIUS_OF_CIRCLE = 3.5;
