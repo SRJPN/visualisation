@@ -58,32 +58,62 @@ var createGraph = function(selection) {
         .attr('transform', Translate(MARGIN, MARGIN));
 };
 
-var loadLineChart = function(drawArea, values, {
+//==========================================Line==========================================
+
+var drawLineChart = function(drawArea, values, {
     xRefiner,
     yRefiner,
     curve,
-    color
+    color,
+    refiner,
+    fillColour
 }) {
-    var g = drawArea.append('g');
 
     var line = d3.line()
         .x(xRefiner)
         .y(yRefiner)
+        .curve(curve)
+
+    var g = drawArea.append('g');
+
+    drawPath(g, values, {
+        refiner: line,
+        color: color,
+    });
+
+    return g;
+};
+
+//==========================================Area==========================================
+
+var drawAreaChart = function(drawArea, values, {
+    xRefiner,
+    yRefiner,
+    curve,
+    color,
+    refiner,
+    fillColour
+}) {
+    var area = d3.area()
+        .x(xRefiner)
+        .y0(INNER_HEIGHT)
+        .y1(yRefiner)
         .curve(curve);
 
-    g.append('path')
-        .classed('values line', true)
-        .attr('d', line(values))
-        .attr('fill', 'none')
-        .attr('stroke-width', '2px')
-        .attr('stroke', color)
+    var g = drawArea.append('g');
+
+    drawPath(g, values, {
+        refiner: area,
+        color: color,
+        fillColour: fillColour
+    });
 
     return g;
 };
 
 //==========================================Decorator==========================================
 
-var decorateLine = function(line, values, {
+var drawScatterChart = function(line, values, {
     xRefiner,
     yRefiner,
     color
@@ -100,6 +130,23 @@ var decorateLine = function(line, values, {
         .attr('fill', 'white');
 };
 
+//==========================================Path==========================================
+
+var drawPath = function(g, values, {
+    refiner,
+    color,
+    fillColour
+}) {
+    g.append("path")
+        .data([values])
+        .attr("class", "line")
+        .attr("d", refiner)
+        .attr('fill', 'none')
+        .attr('stroke-width', '2px')
+        .attr('stroke', color || 'none')
+        .attr('fill', fillColour || 'none')
+};
+
 //==========================================Misc Functions==========================================
 
 var modifier = function(number) {
@@ -111,6 +158,6 @@ var tickFormatter = function(tickValue) {
 };
 
 var drawAndDecorateLine = function(chartArea, points, options) {
-    var line = loadLineChart(chartArea, points, options);
-    decorateLine(line, points, options)
+    var line = drawLineChart(chartArea, points, options);
+    drawScatterChart(line, points, options)
 };
