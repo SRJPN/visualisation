@@ -9,7 +9,7 @@ const DEFAULT_Y_RANGE = DEFAULT_X_RANGE = [0, 10];
 
 const TICKS_ON_X_AXIS = TICKS_ON_Y_AXIS = 10;
 
-const Translate = (x, y) => "translate(" + x + (y ? "," + y : "") + ")";
+const Translate = (x, y) => `translate(${x}${y ? ','+y : ''})`;
 
 //==========================================Scales==========================================
 
@@ -46,13 +46,17 @@ var drawAxis = function(svg) {
 
 //==========================================Graph==========================================
 
-var createGraph = function(selection) {
+var createSvg = function(selection, obj) {
     var svg = selection.append('svg')
         .attr('width', WIDTH)
         .attr('height', HEIGHT)
-        .style('display', 'block');
+        .style('display', 'block')
+    return svg;
+};
 
-    drawAxis(svg)
+var createGraph = function(selection) {
+    var svg = createSvg(selection);
+    drawAxis(svg);
 
     return svg.append('g')
         .attr('transform', Translate(MARGIN, MARGIN));
@@ -110,7 +114,7 @@ var drawAreaChart = function(drawArea, values, {
     return g;
 };
 
-//==========================================Decorator==========================================
+//==========================================Scatter==========================================
 
 var drawScatterChart = function(line, values, {
     xRefiner,
@@ -127,6 +131,29 @@ var drawScatterChart = function(line, values, {
         .attr('stroke-width', '2px')
         .attr('stroke', color)
         .attr('fill', 'white');
+};
+
+//==========================================Pie==========================================
+
+var drawPieChart = function(svg, values, {
+    innerRadius,
+    outerRadius,
+    pie,
+    color
+}) {
+
+    var arc = d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+
+    var g = svg.selectAll('g')
+        .data(pie(values))
+        .enter()
+        .append('g');
+
+    g.append('path')
+        .style('fill', color)
+        .attr("d", arc);
 };
 
 //==========================================Path==========================================
