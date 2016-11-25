@@ -187,3 +187,7 @@ var drawAndDecorateLine = function(chartArea, points, options) {
     var line = drawLineChart(chartArea, points, options);
     drawScatterChart(line, points, options)
 };
+
+var appendGAndTranslate = function(svg, transform) {
+    return svg.append("g").attr("transform", Translate(transform.x, transform.y));
+};
