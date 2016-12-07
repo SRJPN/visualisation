@@ -7,3 +7,11 @@
 .frame>* {
     display: block;
 }
+
+h1 {
+    align-content: center;
+}
+
+body {
+    text-align: center;
+}
