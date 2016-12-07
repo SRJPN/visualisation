@@ -70,7 +70,7 @@ var createDrawArea = function() {
     var drawArea = d3.select('.container')
         .append('svg')
         .classed('drawArea', true)
-        .attr('width', '100%')
+        .attr('width', '600px')
     return drawArea;
 };
 
