@@ -52,8 +52,7 @@ window.onload = function() {
             'xRefiner': decoratedXScale,
             'yRefiner': decoratedSineScale,
             'curve': curve.d3Curve,
-            'color': 'brown',
-            'refiner': sineLine
+            'color': 'brown'
         };
 
         var chartArea = createGraph(container);
