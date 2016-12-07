@@ -8,7 +8,7 @@ echo '<!DOCTYPE html>
 
 <script type="text/javascript" src="javascript/d3.v4.js">
 </script>
-<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+
 
 <script type="text/javascript" src=
 "javascript/jquery-3.1.1.min.js">
@@ -17,7 +17,7 @@ echo '<!DOCTYPE html>
 </script>
 <script type="text/javascript" src="javascript/'$1'.js">
 </script>
-<!-- <script type="text/javascript" src="javascript/random.js"></script> -->
+
 <title></title>
 </head>
 <body>
