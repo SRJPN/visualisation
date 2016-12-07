@@ -48,6 +48,13 @@ window.onload = function() {
     var container = d3.select('.container');
 
     curveArray.forEach(function(curve) {
+        var straightLineDetails = {
+            'xRefiner': decoratedXScale,
+            'yRefiner': decoratedYScale,
+            'curve': curve.d3Curve,
+            'color': 'steelblue'
+        };
+
         var sineLineDetails = {
             'xRefiner': decoratedXScale,
             'yRefiner': decoratedSineScale,
