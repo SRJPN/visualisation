@@ -138,7 +138,8 @@ var drawAreaChart = function(drawArea, values, {
     curve,
     color,
     refiner,
-    fillColour
+    fillColour,
+    fillColourOpacity
 }) {
     var area = d3.area()
         .x(xRefiner)
@@ -150,7 +151,8 @@ var drawAreaChart = function(drawArea, values, {
 
     drawPath(g, values, {
         refiner: area,
-        fillColour: fillColour
+        fillColour: fillColour,
+        opacity: fillColourOpacity
     });
 
     return g;
@@ -203,7 +205,8 @@ var drawPieChart = function(svg, values, {
 var drawPath = function(g, values, {
     refiner,
     color,
-    fillColour
+    fillColour,
+    opacity
 }) {
     g.append("path")
         .data([values])
@@ -213,6 +216,7 @@ var drawPath = function(g, values, {
         .attr('stroke-width', '2px')
         .attr('stroke', color || 'none')
         .attr('fill', fillColour || 'none')
+        .attr('opacity', opacity || 'none')
 };
 
 //==========================================Misc Functions==========================================
@@ -227,7 +231,7 @@ var tickFormatter = function(tickValue) {
 
 var drawAndDecorateLine = function(chartArea, points, options) {
     var line = drawLineChart(chartArea, points, options);
-    drawScatterChart(line, points, options)
+    return drawScatterChart(line, points, options)
 };
 
 var appendGAndTranslate = function(svg, transform) {
