@@ -28,20 +28,62 @@ var decoratedSineScale = ([x, y]) => yScale(modifier(x));
 
 //==========================================Axis==========================================
 
-var createAxis = function(svg, axis, [x, y]) {
-    svg.append('g')
+var createAxis = function(svg, axis, klass, [x, y]) {
+    return svg.append('g')
         .attr('transform', Translate(x, y))
-        .call(axis);
+        .call(axis)
+        .classed(klass, true);
 };
 
-var drawAxis = function(svg) {
+var drawAxis = function(svg, tickFormatter, gridProperties) {
     var xAxis = d3.axisBottom(xScale).ticks(TICKS_ON_X_AXIS).tickFormat(tickFormatter);
-    createAxis(svg, xAxis, [MARGIN, HEIGHT - MARGIN]);
+    var xAxisG = createAxis(svg, xAxis, 'xAxis', [MARGIN, HEIGHT - MARGIN]);
 
     var yAxis = d3.axisLeft(yScale).ticks(TICKS_ON_Y_AXIS).tickFormat(tickFormatter);
-    createAxis(svg, yAxis, [MARGIN, MARGIN]);
+    var yAxisG = createAxis(svg, yAxis, 'yAxis', [MARGIN, MARGIN]);
+
+    gridProperties && drawGrid(svg.selectAll('.xAxis .tick'), svg.selectAll('.yAxis .tick'), gridProperties);
 
     return svg;
+};
+
+//==========================================Grid==========================================
+
+var createGrid = function(g, {
+    stroke,
+    strokeWidth,
+    opacity
+}, {
+    x1,
+    y1,
+    x2,
+    y2
+}) {
+    g.append('line')
+        .attr('x1', x1)
+        .attr('y1', y1)
+        .attr('x2', x2)
+        .attr('y2', y2)
+        .attr('stroke-width', strokeWidth)
+        .attr('stroke', stroke)
+        .attr('opacity', opacity)
+        .classed('grid', true);
+};
+
+var drawGrid = function(xAxis, yAxis, grid) {
+    createGrid(xAxis, grid, {
+        x1: 0,
+        y1: 0,
+        x2: 0,
+        y2: -INNER_HEIGHT
+    });
+
+    createGrid(yAxis, grid, {
+        x1: 0,
+        y1: 0,
+        x2: INNER_WIDTH,
+        y2: 0
+    });
 };
 
 //==========================================Graph==========================================
@@ -54,9 +96,9 @@ var createSvg = function(selection, obj) {
     return svg;
 };
 
-var createGraph = function(selection) {
+var createGraph = function(selection, withGrid, ticker) {
     var svg = createSvg(selection);
-    drawAxis(svg);
+    drawAxis(svg, withGrid, ticker || tickFormatter);
 
     return svg.append('g')
         .attr('transform', Translate(MARGIN, MARGIN));
